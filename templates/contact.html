@@ -1,0 +1,72 @@
+{% extends "headers.html" %}
+{% block content %}
+
+<!-- Main Content -->
+<main>
+  <div class="container">
+    <h1>Contact Us</h1>
+    <p class="display-7">
+      If you have any questions or suggestions, please feel free to contact us at Team Garuda. We are always looking for ways to improve our service.
+    </p>
+    <div style="display: none;" class="alert alert-success" id="success-alert" role="alert">
+      Thank you for contacting us! We will get back to you soon.
+    </div>
+
+    
+    <div class="contact-info">
+      <h5>Contact Information:</h5>
+      <p>Mobile: +91 12345 67890</p> <!-- Replace with your contact mobile number -->
+      <p>Email: contact@Garudasolutions.com</p> <!-- Replace with your contact email -->
+      <p>Address: Garuda Solutions,Visakhapatnam, Andhra Pradesh, 123456</p> <!-- Replace with your address -->
+    </div>
+  </div>
+</main>
+
+
+
+<!-- Footer -->
+<footer class="jumbotron text-center text-white fixed-bottom" style="background-color: #030303">
+  <div class="text-center p-3" style="background-color: rgba(255, 255, 255, 0)">
+    <p>
+      Made With 🩷 By
+      <a style="color: #0ed9ddd6; text-decoration: none" href="#">Team Garuda</a>
+    </p>
+  </div>
+</footer>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+<!-- EmailJS Setup -->
+<script type="text/javascript">
+  emailjs.init('Public Key') // Replace with your emailjs public key
+</script>
+
+<script>
+const btn = document.getElementById('button');
+const alerter = document.getElementById('success-alert');
+
+document.getElementById('form')
+  .addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    btn.value = 'Submitting...';
+
+    const serviceID = 'service_id'; // Replace with your service_id
+    const templateID = 'template_id'; // Replace with your template id
+
+    emailjs.sendForm(serviceID, templateID, this)
+      .then(() => {
+        alerter.style.display = 'block';
+        btn.value = 'Submitted';
+      }, (err) => {
+        btn.value = 'Submit';
+        alert(JSON.stringify(err));
+      });
+});
+
+
+</script>
+
+{% endblock %}
+</body>
+</html>
